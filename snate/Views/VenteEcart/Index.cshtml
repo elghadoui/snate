@@ -1,0 +1,330 @@
+﻿@using snate.Models.Ecart
+@model EcartVM
+ 
+@{
+    ViewData["Title"] = "Ecart";
+    var order = Model.VenteEcartlst;
+    int indx = 0;
+
+}
+
+
+<div class="container-xxl flex-grow-1 container-p-y">
+    <div class="row gy-6">
+        <div class="col-xl-8 col-lg-7 align-self-end mt-md-7 mt-lg-8 pt-md-2 pt-lg-0">
+            <div class="card">
+               
+                    <div class="col-12 col-md-12">
+
+                        <div class="card-body">
+                            <h4 class="card-title mb-9 text-truncate">ECART <span class="fw-bold">VARIETE</span> </h4>
+                        <form asp-action="Index" method="get">
+                            
+                            <div class="row mt-4 gap-2 gap-sm-0">
+                            <div class="col-12 col-sm-6 col-md-4">
+                                    <select asp-for="codvar" asp-items="@Model.VarieteLst" class="form-select form-select-sm animation-dropdown">
+                                        <option value="0">--Toute Variete--</option>
+                                    </select>
+                                   
+                            </div>
+                            <!-- Button trigger modal -->
+                            <div class="col-12 col-sm-6 col-md-8">
+                                    <button type="submit" class="btn btn-primary waves-effect waves-light">
+                                    Afficher Variete
+                                </button>
+                            </div>
+                            
+                        </div>
+                        </form>
+                        </div>
+                   
+                    </div>
+                    
+                 
+            </div>
+        </div>
+        <div class="col-xl-4 col-lg-5">
+            <div class="row">
+                <div class="col-12 col-md-6 col-sm-6">
+                    <div class="card">
+                        <div class="card-header d-flex align-items-center justify-content-between">
+                            <div class="avatar">
+                                <div class="avatar-initial bg-success rounded-circle shadow-xs">
+                                    <i class="ri-money-dollar-circle-line ri-24px"></i>
+                                </div>
+                            </div>
+                            <div class="dropdown">
+                                <button class="btn text-muted p-0" type="button" id="revenueID" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="ri-more-2-line ri-24px"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="revenueID">
+                                    <a class="dropdown-item waves-effect" href="javascript:void(0);">Refresh</a>
+                                    <a class="dropdown-item waves-effect" href="javascript:void(0);">Share</a>
+                                    <a class="dropdown-item waves-effect" href="javascript:void(0);">Update</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h6 class="mb-1">Revenue</h6>
+                            <div class="d-flex flex-wrap mb-1 align-items-center">
+                                <h4 class="mb-0 me-2">$95.2k</h4>
+                                <p class="text-success mb-0">+12%</p>
+                            </div>
+                            <small>Revenue Increase</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="card h-100">
+                        <div class="card-header d-flex align-items-center justify-content-between">
+                            <div class="avatar">
+                                <div class="avatar-initial bg-info rounded-circle shadow-xs">
+                                    <i class="ri-bank-card-line ri-24px"></i>
+                                </div>
+                            </div>
+                            <div class="dropdown">
+                                <button class="btn text-muted p-0" type="button" id="transactionsID" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="ri-more-2-line ri-24px"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="transactionsID">
+                                    <a class="dropdown-item waves-effect" href="javascript:void(0);">Refresh</a>
+                                    <a class="dropdown-item waves-effect" href="javascript:void(0);">Share</a>
+                                    <a class="dropdown-item waves-effect" href="javascript:void(0);">Update</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h6 class="mb-1">Transactions</h6>
+                            <div class="d-flex flex-wrap mb-1 align-items-center">
+                                <h4 class="mb-0 me-2">1.2k</h4>
+                                <p class="text-success mb-0">+38%</p>
+                            </div>
+                            <small>Daily Transactions</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-8">
+            <div class="card h-100">
+                <div class="row h-100">
+                    <div class="col-md-7 pe-md-0">
+                        <div class="card-header">
+                            <h5 class="mb-0">Total Profit</h5>
+                        </div>
+                        <div class="card-body" style="position: relative;">
+                        </div>
+                    </div>
+                    <div class="col-md-5 border-start ps-md-0">
+                        <hr class="d-block d-md-none my-0">
+                        <div class="card-header">
+                            <div class="d-flex justify-content-between">
+                                <h5 class="mb-0">$482.85k</h5>
+                                <div class="dropdown">
+                                    <button class="btn text-muted p-0" type="button" id="totalProfit" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="ri-more-2-line ri-24px"></i>
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="totalProfit">
+                                        <a class="dropdown-item waves-effect" href="javascript:void(0);">Last 28 Days</a>
+                                        <a class="dropdown-item waves-effect" href="javascript:void(0);">Last Month</a>
+                                        <a class="dropdown-item waves-effect" href="javascript:void(0);">Last Year</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="card-subtitle mb-0">Last month balance $234.40k</p>
+                        </div>
+                        @foreach (var item in Model.soldeEcarts)
+                        {
+                            <div class="card-body pt-7">
+                                <div class="d-flex align-items-center mb-4">
+                                    <div class="avatar">
+                                        <div class="avatar-initial bg-label-success rounded">
+                                            <i class="ri-pie-chart-2-line ri-24px"></i>
+                                        </div>
+                                    </div>
+                                    <div class="ms-3 d-flex flex-column">
+                                        <h6 class="mb-1"> ??? </h6>
+                                        <p class="mb-0">Total Vente</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center mb-4">
+                                    <div class="avatar">
+                                        <div class="avatar-initial bg-label-primary rounded">
+                                            <i class="ri-wallet-line ri-24px"></i>
+                                        </div>
+                                    </div>
+                                    <div class="ms-3 d-flex flex-column">
+                                        <h6 class="mb-1">@item.solde</h6>
+                                        <p class="mb-0">Total Reglement</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center mb-4">
+                                    <div class="avatar">
+                                        <div class="avatar-initial bg-label-secondary rounded">
+                                            <i class="ri-bank-card-line ri-24px"></i>
+                                        </div>
+                                    </div>
+                                    <div class="ms-3 d-flex flex-column">
+                                        <h6 class="mb-1"> @item.mvente</h6>
+                                        <p class="mb-0">Total Solde</p>
+                                    </div>
+                                </div>
+                                <div>
+                                </div>
+                            </div>
+                        }
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+       <!-- tabacheteur-->
+        <div class="col-xxl-4 col-md-6">
+            <div class="card h-100">
+                <div class="card-header d-flex align-items-center justify-content-between">
+                    <h5 class="card-title m-0 me-2">Top 5 Acheteur</h5>
+                    <div class="dropdown">
+                        <button class="btn text-muted p-0" type="button" id="meetingSchedule" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="ri-more-2-line ri-24px"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="meetingSchedule">
+                            <a class="dropdown-item waves-effect" href="javascript:void(0);">Last 28 Days</a>
+                            <a class="dropdown-item waves-effect" href="javascript:void(0);">Last Month</a>
+                            <a class="dropdown-item waves-effect" href="javascript:void(0);">Last Year</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <ul class="p-0 m-0">
+                     @foreach (var item in Model.topAcheteurlst)
+                        {
+                          
+                            string png = @indx.ToString()+ ".png";
+                            <li class="d-flex align-items-center mb-4 pb-2">
+                                <div class="avatar flex-shrink-0 me-4">
+                                    
+                                    <img src="~/assets/img/avatars/@png" alt="avatar" class="rounded-circle">
+                                </div>
+                                <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                    <div class="me-2">
+                                        <h6 class="mb-1">@item.nomach</h6>
+                                        <small class="d-flex align-items-center">
+                                            <i class="ri-calendar-line ri-14px"></i>
+                                            <span class="ms-2">@($"{@item.pdpese:n0}")</span>
+                                        </small>
+                                    </div>
+                                    <div class="badge bg-label-warning rounded-pill">@($"{@item.mnt:n0}")</div>
+                                </div>
+                            </li>
+                            indx++;
+                        }
+
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+       <!-- fin acheteur-->
+        <div class="col-xxl-12 mb-12 order-5 order-xxl-0">
+            <div class="card h-100">
+                <div class="card-header d-flex align-items-center justify-content-between">
+                    <div class="card-title mb-0">
+                        <h5 class="m-0 me-2">Exportation</h5>
+                    </div>
+                    <div class="dropdown">
+                        <button class="btn p-0" type="button" id="deliveryExceptions" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="ri-more-2-line ri-20px"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="deliveryExceptions">
+                            <a class="dropdown-item waves-effect" href="javascript:void(0);">Select All</a>
+                            <a class="dropdown-item waves-effect" href="javascript:void(0);">Refresh</a>
+                            <a class="dropdown-item waves-effect" href="javascript:void(0);">Share</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body pb-2">
+                    <div class="table-responsive">
+                        <!--table-->
+                        @Html.EJS().Grid("Grid").DataSource((IEnumerable<Object>)order).AllowExcelExport().ToolbarClick("toolbarClick").Height("600").Columns(col =>
+                                 {
+                                     col.Field("numvnt").HeaderText("ID").Width("40").TextAlign(Syncfusion.EJ2.Grids.TextAlign.Right).Add();
+
+                                     col.Field("dtevnt").HeaderText("Date Vente").Width("70").Add();
+                                     col.Field("nomvar").HeaderText("Variete").Width("120").Add();
+                                     col.Field("nomach").HeaderText("Acheteur").Width("110").Add();
+                                     col.Field("tecar").HeaderText("Type Ecart").Width("90").Add();
+                                     col.Field("pdsfru").HeaderText("pdBrute").Width("70").Add();
+                                     col.Field("pdspes").HeaderText("Poid Pese").Width("70").Add();
+                                     col.Field("prxkg").HeaderText("Prix Unitaire").Width("50").Add();
+                                     col.Field("montan").HeaderText("Montant").Width("70").Add();
+
+                                 }).AllowSorting(true).AllowGrouping(true).AllowFiltering(true).AllowPaging(true).PageSettings(page => page.PageSize(150)).FilterSettings(filter =>
+                                 {
+                                     filter.Type(Syncfusion.EJ2.Grids.FilterType.Excel);
+                                 }).Toolbar(new List<string>() {
+                        "ExcelExport","PdfExport","Search"
+                        }).GroupSettings(group => group.EnableLazyLoading(true).Columns(new string[] {
+                        "nomvar"
+                                 })).Aggregates(agg => { agg.Columns(new List<Syncfusion.EJ2.Grids.GridAggregateColumn>() { new Syncfusion.EJ2.Grids.GridAggregateColumn() { Field = "montan", Format = "N", Type = "Sum", GroupCaptionTemplate = "${Sum}" }, new Syncfusion.EJ2.Grids.GridAggregateColumn() { Field = "montan", Format = "N", Type = "Sum", FooterTemplate = "${Sum}" }, new Syncfusion.EJ2.Grids.GridAggregateColumn() { Field = "montan", Format = "N", Type = "Sum", FooterTemplate = "Total: ${Sum}" }, new Syncfusion.EJ2.Grids.GridAggregateColumn() { Field = "numvnt", Format = "N", Type = "Count", FooterTemplate = "nbr Dossier: ${Count}" } }).Add(); }).Render()
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+
+       
+
+    </div>
+
+
+
+
+    <!--/Profil Calibre Export-->
+</div>
+<style>
+    .e-grid .e-row:hover .e-rowcell {
+        background-color: rgb(204, 229, 255) !important;
+    }
+
+    .e-grid .e-rowcell.e-selectionbackground {
+        background-color: rgb(230, 230, 250);
+    }
+
+    .e-grid .e-row.e-altrow {
+        background-color: #f6f7fb;
+    }
+
+    .e-grid .e-headercell {
+        background-color: #f6f7fb;
+        color: rgb(3, 2, 2);
+    }
+</style>
+@section Scripts
+{
+    <script>
+        let isFirstDataBound = true;
+        function dataBound() {
+            if (isFirstDataBound === true) {
+                var grid = document.getElementById("Grid").ej2_instances[0];
+                grid.groupModule.collapseAll();
+                isFirstDataBound = false;
+            }
+        }
+        function toolbarClick(args) {
+            var grid = document.getElementById("Grid").ej2_instances[0];
+            if (args.item.id === 'Grid_pdfexport') {
+                let exportProperties = {
+                    exportType: 'CurrentPage'
+                };
+                grid.pdfExport(exportProperties);
+            }
+            else {
+                args.item.id === 'grid_excelexport' ? grid.excelExport() : grid.csvExport();
+            }
+            
+        }
+    </script>
+}

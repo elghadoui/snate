@@ -1,0 +1,584 @@
+﻿@using Syncfusion.EJ2
+@model VarieteDash
+@{
+    ViewData["Title"] = "Detail Variete";
+    var order1 = Model.CondVergerList;
+    var order = Model.TvnrecapList;
+    var vChart = Model.marcheVarieteslst;
+    var vChartEcart = Model.VenteEcartMoislst;
+}
+
+<div class="container-xxl flex-grow-1 container-p-y">
+    <div class="row gy-6">
+        <!-- Congratulations card -->
+       
+        <!--/ Congratulations card -->
+        <!-- Transactions -->
+        <div class="col-md-12 col-lg-12">
+            <div class="card h-100">
+                <div class="card-header">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h5 class="card-title m-0 me-2">Transactions</h5>
+                        <div class="dropdown">
+                            <button class="btn text-muted p-0"
+                                    type="button"
+                                    id="transactionID"
+                                    data-bs-toggle="dropdown"
+                                    aria-haspopup="true"
+                                    aria-expanded="false">
+                                <i class="ri-more-2-line ri-24px"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="transactionID">
+                                <a class="dropdown-item" href="javascript:void(0);">Refresh</a>
+                                <a class="dropdown-item" href="javascript:void(0);">Share</a>
+                                <a class="dropdown-item" href="javascript:void(0);">Update</a>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="small mb-0"><span class="h6 mb-0">Total @($"{@Model.TvnrecapList.nomvar:n2}")Growth</span> 😎 this month</p>
+                </div>
+                <div class="card-body pt-lg-10">
+                    <div class="row g-6">
+                        <div class="col-md-3 col-6">
+                            <div class="d-flex align-items-center">
+                                <div class="avatar">
+                                    <div class="avatar-initial bg-primary rounded shadow-xs">
+                                        <i class="ri-pie-chart-2-line ri-24px"></i>
+                                    </div>
+                                </div>
+                                <div class="ms-3">
+                                    <p class="mb-0">Reception</p>
+                                    <h5 class="mb-0">@($"{@Model.TvnrecapList.pdrec:n2}")</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-6">
+                            <div class="d-flex align-items-center">
+                                <div class="avatar">
+                                    <div class="avatar-initial bg-success rounded shadow-xs">
+                                        <i class="ri-group-line ri-24px"></i>
+                                    </div>
+                                </div>
+                                <div class="ms-3">
+                                    <p class="mb-0">Versement</p>
+                                    <h5 class="mb-0">@($"{@Model.TvnrecapList.pdver:n2}")</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-6">
+                            <div class="d-flex align-items-center">
+                                <div class="avatar">
+                                    <div class="avatar-initial bg-warning rounded shadow-xs">
+                                        <p class="mb-0">80%</p>
+                                    </div>
+                                </div>
+                                <div class="ms-3">
+                                    <p class="mb-0">Export</p>
+                                    <h5 class="mb-0">@($"{@Model.TvnrecapList.pdExp:n2}")</h5>
+                                   
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-6">
+                            <div class="d-flex align-items-center">
+                                <div class="avatar">
+                                    <div class="avatar-initial bg-success rounded shadow-xs">
+
+                                        <p class="mb-0">20%</p>
+                                    </div>
+                                </div>
+                                <div class="ms-3">
+                                    <p class="mb-0">Ecart</p>
+                                    <h5 class="mb-0">@($"{@Model.TvnrecapList.pdecart:n2}")</h5>
+                                   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/ Transactions -->
+    </div>
+    <br />
+    <div class="card mb-4">
+        <div class="table-responsive mb-3">
+            <div class="card-header d-flex align-items-center justify-content-between">
+                <h5 class="card-title m-0 me-2">Detail Producteur</h5>
+
+            </div>
+              <div class="table-responsive text-nowrap  ">
+                <ejs-grid id="Grid" dataSource="@order1" allowPaging="true" enableHover="true" gridLines="Both"
+                          allowSorting="true" allowTextWrap="true" allowGrouping="false" allowResizing="true">
+                    <e-grid-pagesettings pageCount="4" pageSizes="true" PageSize="5"></e-grid-pagesettings>
+                    <e-grid-columns>
+                        <e-grid-column field="refver" headerText="Verger" minWidth="30" width="50"
+                                       HeaderTemplate="<div style='background-color: lightgreen; text-align: center;'>Verger</div>"></e-grid-column>
+                        <e-grid-column field="nomadh" headerText="Producteur" minWidth="30" width="150" ></e-grid-column>
+                        <e-grid-column headerText="Poid TVN" textAlign="Center" columns="@( new List<Syncfusion.EJ2.Grids.GridColumn>() {
+                            new Syncfusion.EJ2.Grids.GridColumn { 
+                                    Field = "pdrec", 
+                                    Width = "100", 
+                                    HeaderText = "Reception", 
+                                    MinWidth="30",
+                                    Format="# ##0.00",
+                                    TextAlign= Syncfusion.EJ2.Grids.TextAlign.Center,
+                                    Template="<div><h6 class='mb-0 text-truncate'>${pdrec}</h6> <small class='text-truncate'>   </small> </div>"},
+                            new Syncfusion.EJ2.Grids.GridColumn { 
+                                Field = "pdver", 
+                                Width = "100", 
+                                HeaderText = "Versement", 
+                                Format="# ##0.00", 
+                                TextAlign= Syncfusion.EJ2.Grids.TextAlign.Center,
+                                MinWidth="10",
+                                Template="<div><h6 class='mb-0 text-truncate'>${pdver}</h6> <small class='text-truncate'>   </small> </div>"}
+                            })">
+                        </e-grid-column>
+                        <e-grid-column headerText="Poid Export en Tonne" 
+                                textAlign="Center" 
+                                columns="@( new List<Syncfusion.EJ2.Grids.GridColumn>() {
+                            new Syncfusion.EJ2.Grids.GridColumn { 
+                                Field = "expcat1", 
+                                Width = "100", 
+                                HeaderText = "CAT I", 
+                                MinWidth="30",
+                                Format="# ##0.00",
+                                TextAlign= Syncfusion.EJ2.Grids.TextAlign.Center ,
+                                Template="<div><h6 class='mb-0 text-truncate'>${expcat1}</h6> <small class='text-truncate'>  ${pcati}  % </small> </div>"},
+                            new Syncfusion.EJ2.Grids.GridColumn {
+                                    Field = "expcat2",
+                                    Width = "100",
+                                    HeaderText = "CAT II",
+                                    MinWidth="30",
+                                    Format="# ##0.00", // This already formats the "expcat1" field
+                                    TextAlign= Syncfusion.EJ2.Grids.TextAlign.Center,
+                                    Template =  "<div><h6 class='mb-0 text-truncate'>${expcat2}</h6> <small class='text-truncate'>${pcatii}% </small> </div>"
+                                },
+                            new Syncfusion.EJ2.Grids.GridColumn { 
+                                Field = "pdExp", 
+                                Width = "100", 
+                                HeaderText = "Total", 
+                                Format="# ##0.00", 
+                                TextAlign= Syncfusion.EJ2.Grids.TextAlign.Center,
+                                MinWidth="10" ,
+                                Template =  "<div><h6 class='mb-0 text-truncate'>${pdExp}</h6> <small class='text-truncate'>${pexp}% </small> </div>"}
+                            
+                            })">
+                        </e-grid-column>
+                        <e-grid-column headerText="Poid Ecart" textAlign="Center" columns="@( new List<Syncfusion.EJ2.Grids.GridColumn>() {
+                            new Syncfusion.EJ2.Grids.GridColumn { 
+                                Field = "pdecart", 
+                                Width = "100", 
+                                HeaderText = "Ecart", 
+                                MinWidth="30",
+                                Format="# ##0.00",
+                                TextAlign= Syncfusion.EJ2.Grids.TextAlign.Center ,
+                                Template =  "<div><h6 class='mb-0 text-truncate'>${pdecart}</h6> <small class='text-truncate'>${peca}% </small> </div>"},
+                            new Syncfusion.EJ2.Grids.GridColumn { 
+                                Field = "freinte", 
+                                Width = "70", 
+                                HeaderText = "Friente", 
+                                MinWidth="30",
+                                Format="P",
+                                TextAlign= Syncfusion.EJ2.Grids.TextAlign.Center }
+                            })">
+                        </e-grid-column>
+                        <e-grid-column field="pdstock" headerText="Poid Stock"
+                                       textAlign="Center" format="# ##0.00" width="120" minWidth="100">
+                             
+                        </e-grid-column>
+                       
+                         
+                        </e-grid-columns>
+                       
+                </ejs-grid>
+            </div>  
+        </div>
+    </div>
+    <!--Export Destination-->
+    <div class="row" >
+        <!-- Order Statistics -->
+        <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4">
+            <div class="card h-100">
+                <div class="card-header d-flex align-items-center justify-content-between pb-0">
+                    <div class="card-title mb-0">
+                        <h5 class="m-0 me-2">Export par Marché</h5>
+                        <small class="text-muted">42.82k Total Sales</small>
+                    </div>
+                    <div class="dropdown">
+                        <button class="btn p-0" type="button" id="orederStatistics" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="bx bx-dots-vertical-rounded"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="orederStatistics">
+                            <a class="dropdown-item" href="javascript:void(0);">Select All</a>
+                            <a class="dropdown-item" href="javascript:void(0);">Refresh</a>
+                            <a class="dropdown-item" href="javascript:void(0);">Share</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body"  >
+                    <div class="d-flex justify-content-between align-items-center mb-3" style="position: relative;" >
+                        <div class="d-flex flex-column align-items-center gap-1">
+                            <h2 class="mb-2">8,258</h2>
+                            <span>Tonnage Exporté</span>
+                        </div>
+                        <div id="orderStatisticsChart" style="min-height: 137.55px;  ">
+                            <div id="apexchartsuvosf78m" class="apexcharts-canvas apexchartsuvosf78m apexcharts-theme-light" style="width: 230px; height: 185.55px;">
+                                <!-- Chart-->
+                                <ejs-accumulationchart id="MChart" enableBorderOnMouseMove="false" enableSmartLabels="true">
+                                    
+                                    <e-accumulationchart-legendsettings visible="false">
+                                    </e-accumulationchart-legendsettings>
+                                    
+                                    <e-accumulation-series-collection>
+                                        <e-accumulation-series dataSource=@vChart xName="nommar" yName="pdExp" name="Marche" innerRadius="85%"
+                                                                  >
+                                            <e-accumulationseries-datalabel name="text" visible="true">
+                                            </e-accumulationseries-datalabel>
+
+                                        </e-accumulation-series>
+                                    </e-accumulation-series-collection>
+
+                                    <e-accumulationchart-centerlabel text="Marche"
+                                                                     hoverTextFormat="${point.y}<br> %  <br>${point.x} ">
+                                    </e-accumulationchart-centerlabel>
+                                </ejs-accumulationchart>
+                            </div>
+                        </div>
+                        
+                                <div class="resize-triggers">
+                                    <div class="expand-trigger">
+                                        <div style="width: 228px; height: 139px;"></div>
+                                    </div>
+                                    <div class="contract-trigger"></div>
+                                </div>
+                    </div>
+                    
+                        <ul class="p-0 m-0" >
+                             @foreach (var item in Model.marcheVarieteslst)
+                {
+                                <li class="d-flex mb-4 pb-1">
+                                    <div class="avatar flex-shrink-0 me-3">
+                                        <span class="avatar-initial rounded bg-label-primary"><i class="bx bx-mobile-alt"></i></span>
+                                    </div>
+                                    <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                        <div class="me-2">
+                                            <h6 class="mb-0">@item.nommar</h6>
+                                            <small class="text-muted"> @($"{(item.pcent*100):n2}") </small>
+                                        </div>
+                                        <div class="user-progress">
+                                            <small class="badge bg-label-secondary rounded-pill text-heading">@($"{item.pdExp:n2}")k</small>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+
+                        </ul>
+                    
+                </div>
+            </div>
+        </div>
+        <!--/ Order Statistics -->
+        <!-- Expense Overview -->
+        <!--Card Profile Calibrage-->
+        <div class="col-md-6 col-lg-4 order-2 mb-4">
+            <div class="card h-100">
+                <div class="card-header d-flex align-items-center justify-content-between">
+                    <h5 class="card-title m-0 me-2">Profile Calibrage Export</h5>
+
+                </div>
+                <div class="card-body ">
+                    @foreach (var item in Model.profilCalibrages)
+                    {
+                        <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+                            <div class="d-flex align-items-center">
+                                <div class="avatar me-3">
+                                    <div class="avatar-initial bg-label-success rounded-circle"> @item.calibre</div>
+                                </div>
+                                <div>
+                                    <div class="d-flex align-items-center gap-1">
+                                        <h6 class="mb-0"> Calibre @item.calibre</h6>
+                                        <i class="mdi mdi-chevron-up mdi-24px text-success"></i>
+                                        <small class="text-success"> .</small>
+                                    </div>
+                                    <small>  @($"{item.pd:n0}") kg</small>
+                                </div>
+                            </div>
+                            <div class="text-end">
+                                <h6 class="mb-0 text-success"> @($"{item.pcal:n2}")%</h6>
+                                <small>Sales</small>
+                            </div>
+                        </div>
+                    }
+                    <!-- fin card body-->
+
+                </div>
+
+
+            </div>
+        </div>
+
+        <!--/Profil Calibre Export-->
+        <!--/ Expense Overview -->
+        <!-- Transactions -->
+        <div class="col-md-6 col-lg-4 order-2 mb-4">
+            <div class="card h-100">
+                <div class="card-header d-flex align-items-center justify-content-between">
+                    <h5 class="card-title m-0 me-2">Emballage Utilisé</h5>
+                    <div class="dropdown">
+                        <button class="btn p-0" type="button" id="transactionID" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="bx bx-dots-vertical-rounded"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="transactionID">
+                            <a class="dropdown-item" href="javascript:void(0);">Last 28 Days</a>
+                            <a class="dropdown-item" href="javascript:void(0);">Last Month</a>
+                            <a class="dropdown-item" href="javascript:void(0);">Last Year</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <ul class="p-0 m-0">
+                         @foreach (var item in Model.emballage_Exps)
+                         {
+                             <li class="d-flex mb-4 pb-1">
+                            <div class="avatar flex-shrink-0 me-3">
+                                    <i class="ri-box-3-line rounded"></i>  
+                            </div>
+                                <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                    <div class="me-2">
+                                        <h6 class="mb-0">@item.emballage</h6>
+                                        <small class="text-muted"> @($"{item.pdexp:n3}")T </small>
+                                    </div>
+                                    <div class="user-progress">
+                                        
+                                        <small class="badge bg-label-secondary rounded-pill text-heading">@($"{item.pcent:n2}") %</small>
+                                    </div>
+                                </div>
+                             
+                        </li>
+                         }
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--/ Transactions -->
+    </div>
+    <!--/Export Destination-->
+    <!--Ecart-->
+    <div class="row">
+        
+        <!-- Expense Overview -->
+        <!--Card Profile Calibrage-->
+        <!--Card Profile Calibrage-->
+        <div class="col-md-4 col-lg-4 col-xl-4 order-0 mb-4 ">
+            <div class="card">
+                <div class="card-header d-flex align-items-center justify-content-between">
+                    <h5 class="card-title m-0 me-2">10 Defaut Ecarts Majeur</h5>
+
+                </div>
+                <div class="card-body overflow-auto p-3 " style="min-height: 260px; height: 360px">
+                    @if (Model.defaut_Ecartslst == null || Model.defaut_Ecartslst.Count == 0)
+                    {
+                        <div class="avatar me-3">
+                            <div class="avatar-initial bg-label-info rounded-circle"> </div>
+                        </div>
+                    }else{
+
+                        int compteur = 1;
+                        string progresname = "prog" + compteur.ToString();
+
+                        @foreach (var item in Model.defaut_Ecartslst)
+                    {
+                            compteur++;
+                            progresname = "prog" + compteur.ToString();
+                        <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+                            <div class="d-flex align-items-center">
+                                    <div class="avatar justify-content-center px-4 rounded-3 me-4 ">
+                                       
+                                        <div class="avatar-initial bg-label-success rounded-circle text-primary ri-bug-fill ri-16px  shadow-xs">   </div>
+                                </div>
+                                <div>
+                                    <div class="d-flex align-items-center gap-1">
+                                        <h8 class="mb-0">@item.intdef</h8>
+                                            <i class="mdi mdi-chevron-up mdi-24px text-primary"></i>
+                                            <small class="text-primary">.</small>
+                                    </div>
+                                        <small> </small>
+                                </div>
+                            </div>
+                            <div class="text-end">
+
+                                    @(Html.EJS().ProgressBar(progresname)
+                                        .Type(Syncfusion.EJ2.ProgressBar.ProgressType.Circular).Value(( item.pcent*100 ))
+                                        .ShowProgressValue(true) 
+                                        .Height("70") 
+                                        .Minimum(0).Maximum(100)
+                                        .Render())
+                                     
+                                <small></small>
+                            </div>
+                        </div>
+                    }
+                        }
+                    <!-- fin card body-->
+
+                </div>
+
+
+            </div>
+        </div>
+
+        <!--/Profil Calibre Export-->
+        <!--/Profil Calibre Export-->
+        <!--/ Expense Overview -->
+        <!-- Transactions -->
+        <div class="col-xl-8">
+            <div class="card h-100">
+                <div class="row h-100">
+                    <div class="col-md-7 pe-md-0">
+                        <div class="card-header">
+                            <h5 class="mb-0">Vente Ecart</h5>
+                            
+                        </div>
+                        <div class="card-body" style="position: relative;">
+                            <div id="totalProfitChart" style="min-height: 260px;">
+                                <div id="apexchartsfkbqhdb7" class="apexcharts-canvas apexchartsfkbqhdb7 apexcharts-theme-light" style="width: 434px; height: 270px;">
+
+
+                                    <ejs-chart id="barchart" title="Vente des ecart mensuelle"  >
+                                        <e-chart-tooltipsettings enable="true">
+                                        </e-chart-tooltipsettings>
+                                        <e-chart-primaryxaxis valueType=Category interval=1>
+                                            <e-majorgridlines width="0"></e-majorgridlines>
+                                            
+                                        </e-chart-primaryxaxis>
+                                        <e-chart-primaryyaxis>
+                                            <e-majorgridlines width="0"></e-majorgridlines>
+                                            <e-majorticklines width="0"></e-majorticklines>
+                                            <e-linestyle width="0"></e-linestyle>
+                                            <e-labelstyle color="transparent"></e-labelstyle>
+                                        </e-chart-primaryyaxis>
+                                        <e-chart-chartarea>
+                                            <e-chartarea-border width="0"></e-chartarea-border>
+                                        </e-chart-chartarea>
+                                        <e-series-collection>
+                                            <e-series dataSource=@vChartEcart 
+                                                     type=Column 
+                                                      xName="mois" 
+                                                      yName="montant"
+                                                      columnSpacing="0.5"
+                                                      width=2
+                                                      opacity="0.5">
+                                                <e-series-marker>
+                                                    <e-series-datalabel visible="true" position="Top">
+                                                        <e-font fontWeight="600" color="#ffffff"></e-font>
+                                                    </e-series-datalabel>
+                                                </e-series-marker>
+                                                <e-series-emptypointsettings mode="Syncfusion.EJ2.Charts.EmptyPointMode.Drop"></e-series-emptypointsettings>
+                                          </e-series>
+                                          
+                                      </e-series-collection>
+                                  </ejs-chart>
+                                </div>
+                            </div>
+                            <div class="resize-triggers"><div class="expand-trigger">
+                                <div style="width: 479px; height: 281px;"></div></div>
+                                <div class="contract-trigger"></div></div>
+                        </div>
+                    </div>
+                    <div class="col-md-5 border-start ps-md-0" >
+                        <hr class="d-block d-md-none my-0">
+                        <div class="card-header">
+                            <div class="d-flex justify-content-between">
+                                <h5 class="mb-0">$482.85k</h5>
+                                <div class="dropdown">
+                                    <button class="btn text-muted p-0" type="button" id="totalProfit" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="ri-more-2-line ri-24px"></i>
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="totalProfit">
+                                        <a class="dropdown-item waves-effect" href="javascript:void(0);">Last 28 Days</a>
+                                        <a class="dropdown-item waves-effect" href="javascript:void(0);">Last Month</a>
+                                        <a class="dropdown-item waves-effect" href="javascript:void(0);">Last Year</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="card-subtitle mb-0">Last month balance $234.40k</p>
+                        </div>
+                        <!-- Solde Ecart-->
+                        <div class="card-body pt-7">
+                            <div class="d-flex align-items-center mb-4">
+                                <div class="avatar">
+                                    <div class="avatar-initial bg-label-success rounded">
+                                        <i class="ri-pie-chart-2-line ri-24px"></i>
+                                    </div>
+                                </div>
+                                <div class="ms-3 d-flex flex-column">
+                                    <h6 class="mb-1">@($"{@Model.soldeEcart.mvente:n2}")</h6>
+                                    <p class="mb-0">Total Vente</p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center mb-4">
+                                <div class="avatar">
+                                    <div class="avatar-initial bg-label-primary rounded">
+                                        <i class="ri-wallet-line ri-24px"></i>
+                                    </div>
+                                </div>
+                                <div class="ms-3 d-flex flex-column">
+                                    <h6 class="mb-1">@($"{@Model.soldeEcart.mreg:n2}")</h6>
+                                    <p class="mb-0">Total Encaissement</p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center mb-4">
+                                <div class="avatar">
+                                    <div class="avatar-initial bg-label-secondary rounded">
+                                        <i class="ri-bank-card-line ri-24px"></i>
+                                    </div>
+                                </div>
+                                <div class="ms-3 d-flex flex-column">
+                                    <h6 class="mb-1">$@($"{@Model.soldeEcart.solde:n2}")</h6>
+                                    <p class="mb-0">Total Credit</p>
+                                </div>
+                            </div>
+                            <div>
+                                <button class="btn btn-primary w-100 waves-effect waves-light" type="button">View Report</button>
+                            </div>
+                        </div>
+                        <!-- Fin Solde Ecart-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/ Transactions -->
+    </div>
+    <!--/Ecart-->
+</div>
+<style>
+    .e-grid .e-row:hover .e-rowcell {
+        background-color: rgb(204, 229, 255) !important;
+    }
+    .e-grid .e-rowcell.e-selectionbackground {
+        background-color: rgb(230, 230, 250);
+    }
+
+    .e-grid .e-row.e-altrow {
+        background-color: #f6f7fb;
+    }
+    .e-grid .e-headercell {
+        background-color: #f6f7fb;
+        color: rgb(3, 2, 2);
+    }
+</style>
+@section Scripts
+{
+
+<script>
+    var pointRender = function (args) {
+        if ((args.point.x).indexOf("USA") > -1) {
+            args.fill = '#f4bc42';
+        }
+        else {
+            args.fill = '#597cf9';
+        }
+    };
+</script>
+}

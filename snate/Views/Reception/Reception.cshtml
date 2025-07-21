@@ -1,0 +1,184 @@
+﻿@using snate.Models.Reception
+@model ReceptionVM
+@{
+    ViewData["Title"] = "Detail Variete";
+    var order = Model.receptionslst;
+    var recap = Model.RecapReceptionlst;
+}
+
+
+<div class="container-xxl flex-grow-1 container-p-y">
+    <div class="row">
+        <div class="col-sm-6 col-lg-3 mb-6">
+            <div class="card card-border-shadow-primary h-100">
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-2">
+                        <div class="avatar me-4">
+                            <span class="avatar-initial rounded bg-label-primary"><i class="ri-car-line ri-24px"></i></span>
+                        </div>
+                        <h4 class="mb-0">42</h4>
+                    </div>
+                    <h6 class="mb-0 fw-normal">On route vehicles</h6>
+                    <p class="mb-0">
+                        <span class="me-1 fw-medium">+18.2%</span>
+                        <small class="text-muted">than last week</small>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-lg-3 mb-6">
+            <div class="card card-border-shadow-warning h-100">
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-2">
+                        <div class="avatar me-4">
+                            <span class="avatar-initial rounded bg-label-warning"><i class="ri-alert-line ri-24px"></i></span>
+                        </div>
+                        <h4 class="mb-0">8</h4>
+                    </div>
+                    <h6 class="mb-0 fw-normal">Vehicles with errors</h6>
+                    <p class="mb-0">
+                        <span class="me-1 fw-medium">-8.7%</span>
+                        <small class="text-muted">than last week</small>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-lg-3 mb-6">
+            <div class="card card-border-shadow-danger h-100">
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-2">
+                        <div class="avatar me-4">
+                            <span class="avatar-initial rounded bg-label-danger"><i class="ri-route-line ri-24px"></i></span>
+                        </div>
+                        <h4 class="mb-0">27</h4>
+                    </div>
+                    <h6 class="mb-0 fw-normal">Deviated from route</h6>
+                    <p class="mb-0">
+                        <span class="me-1 fw-medium">+4.3%</span>
+                        <small class="text-muted">than last week</small>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-lg-3 mb-6">
+            <div class="card card-border-shadow-info h-100">
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-2">
+                        <div class="avatar me-4">
+                            <span class="avatar-initial rounded bg-label-info"><i class="ri-time-line ri-24px"></i></span>
+                        </div>
+                        <h4 class="mb-0">13</h4>
+                    </div>
+                    <h6 class="mb-0 fw-normal">Late vehicles</h6>
+                    <p class="mb-0">
+                        <span class="me-1 fw-medium">-2.5%</span>
+                        <small class="text-muted">than last week</small>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-xxl-12 mb-12 order-5 order-xxl-0">
+            <div class="card h-100">
+                <div class="card-header d-flex align-items-center justify-content-between">
+                    <div class="card-title mb-0">
+                        <h5 class="m-0 me-2">Recap Reception</h5>
+                    </div>
+                    <div class="dropdown">
+                        <button class="btn p-0" type="button" id="deliveryExceptions" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="ri-more-2-line ri-20px"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="deliveryExceptions">
+                            <a class="dropdown-item waves-effect" href="javascript:void(0);">Select All</a>
+                            <a class="dropdown-item waves-effect" href="javascript:void(0);">Refresh</a>
+                            <a class="dropdown-item waves-effect" href="javascript:void(0);">Share</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body pb-2"> 
+                    <div class="table-responsive">
+                         <!--table-->
+                        <ejs-grid id="Gridreca" dataSource=recap allowResizing='true'>
+                            <e-grid-columns>
+                                
+                                <e-grid-column field="nomvar" headerText="Variete" width="200" textAlign="Left" type="number"></e-grid-column>
+                                <e-grid-column field="recava" headerText="Reception Avant" width="120" format="N0" textAlign="Right" type="number"></e-grid-column>
+                                <e-grid-column field="recdte" headerText="Aujourdhuit" width="120" format="N" textAlign="Right" type="number"></e-grid-column>
+                                <e-grid-column field="rectot" headerText="Total Reception" width="120" format="N" textAlign="Right" type="number"></e-grid-column>
+                                <e-grid-column field="tngver" headerText="Tonnage Verse" width="120" textAlign="Right" type="number"></e-grid-column>
+                                <e-grid-column field="tngstc" headerText="Stock Actuelle" width="120" textAlign="Right" type="number" ></e-grid-column>
+                                
+                            </e-grid-columns>
+                        </ejs-grid>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+  
+   
+
+    @Html.EJS().Grid("Grid").DataSource((IEnumerable<Object>)order).AllowExcelExport().ToolbarClick("toolbarClick").Height("600").Columns(col =>
+            {
+                col.Field("numrec").HeaderText("ID").Width("50").TextAlign(Syncfusion.EJ2.Grids.TextAlign.Right).Add();
+                col.Field("numbl").HeaderText("nBL").Width("60").Add();
+                col.Field("dterec").HeaderText("Date_Reception").Width("70").Add();
+                col.Field("numveh").HeaderText("Vehicule").Width("100").Add();
+                col.Field("nomvar").HeaderText("Variete").Width("170").Add();
+                col.Field("nbrcai").HeaderText("Nbr Caisse").Width("50").Add();
+                col.Field("pdrec").HeaderText("Net Reception").Width("100").Add();
+                col.Field("nomsvar").HeaderText("Sous Variete").Width("130").Add();
+                col.Field("refver").HeaderText("idVerger").Width("70").Add();
+                col.Field("nomadh").HeaderText("Nom Producteur").Width("100").Add();
+            }).AllowSorting(true).AllowGrouping(true).AllowFiltering(true).AllowPaging(true).PageSettings(page => page.PageSize(155)).FilterSettings(filter => { 
+                filter.Type(Syncfusion.EJ2.Grids.FilterType.Excel); 
+            }).Toolbar(new List<string>() {
+                "ExcelExport", "CsvExport","Search"
+    }).GroupSettings(group => group.EnableLazyLoading(true).Columns(new string[] {
+                "nomvar" 
+            })).Aggregates(agg=> {agg.Columns(new List<Syncfusion.EJ2.Grids.GridAggregateColumn>(){ new Syncfusion.EJ2.Grids.GridAggregateColumn(){Field = "nbrcai", Format = "N", Type = "Sum", FooterTemplate = "${Sum}" },new Syncfusion.EJ2.Grids.GridAggregateColumn() {Field = "pdrec", Format = "N", Type = "Sum", FooterTemplate = "Total: ${Sum}"},new Syncfusion.EJ2.Grids.GridAggregateColumn() {Field = "numveh", Format = "N", Type = "Count", FooterTemplate = "nbr voyage: ${Count}"}}).Add();}).Render()
+
+    <!--/Profil Calibre Export-->
+</div> 
+<style>
+    .e-grid .e-row:hover .e-rowcell {
+        background-color: rgb(204, 229, 255) !important;
+    }
+
+    .e-grid .e-rowcell.e-selectionbackground {
+        background-color: rgb(230, 230, 250);
+    }
+
+    .e-grid .e-row.e-altrow {
+        background-color: #f6f7fb;
+    }
+
+    .e-grid .e-headercell {
+        background-color: #f6f7fb;
+        color: rgb(3, 2, 2);
+    }
+</style>
+@section Scripts
+{
+<script>
+    let isFirstDataBound = true;
+    function dataBound() {
+        if (isFirstDataBound === true) {
+            var grid = document.getElementById("Grid").ej2_instances[0];
+            grid.groupModule.collapseAll();
+            isFirstDataBound = false;
+        }
+    }
+        function toolbarClick(args) {
+            var grid = document.getElementById("Grid").ej2_instances[0];
+            args.item.id === 'grid_excelexport' ? grid.excelExport() : grid.csvExport();
+        }
+</script>
+
+     
+        
+     
+}
